@@ -3,21 +3,42 @@ import './App.css';
 import myPic from './ahsan.jpg'; 
 
 function App() {
-  const [data, setData] = useState(null);
+  // Default Data (Agar server fail ho jaye to yeh dikhega)
+  const defaultData = {
+    profile: {
+      name: "Muhammad Ahsan Mubarak",
+      role: "Full Stack Developer (MERN)",
+      bio: "Based in Pakistan 🇵🇰. Bridging the gap between clean code and interactive design.",
+    },
+    skills: {
+      frontend: ["React.js", "Tailwind CSS", "HTML/CSS", "JavaScript"],
+      backend: ["Node.js", "Express", "MongoDB", "API Design"],
+      devOps: ["Git", "GitHub", "Vercel", "Render"]
+    },
+    projects: [
+      { id: 1, title: "Project Loading...", desc: "Server is connecting...", type: "Waiting" }
+    ]
+  };
+
+  const [data, setData] = useState(defaultData);
   const [serverStatus, setServerStatus] = useState("Connecting...");
 
   useEffect(() => {
-    // Yahan humne naya Live Link laga diya hai
     fetch('https://ahsan-api-final.vercel.app/api/data')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Failed");
+        return res.json();
+      })
       .then(result => {
         setData(result);
         setServerStatus("Online 🟢");
       })
-      .catch(err => setServerStatus("Offline 🔴"));
+      .catch(err => {
+        console.log("Server Error:", err);
+        setServerStatus("Offline 🔴 (Using Local Data)");
+        // Agar error aaye to hum data ko null nahi karte, balki defaultData hi rehne dete hain
+      });
   }, []);
-
-  if (!data) return <div className="loading">Booting up server...</div>;
 
   return (
     <div className="container">
@@ -29,14 +50,24 @@ function App() {
       <header className="hero">
         <img 
             src={myPic} 
-            alt="Muhammad Ahsan" 
+            alt="Profile" 
             className="profile-pic" 
         />
         <h1>{data.profile.name}</h1>
         <h2>{data.profile.role}</h2>
         <p>{data.profile.bio}</p>
+        
         <div className="cta-buttons">
-            <button className="primary-btn">View Resume</button>
+            {/* Resume Link */}
+            <a 
+              href="/resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="primary-btn"
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+            >
+              View Resume
+            </a>
             <button className="secondary-btn">GitHub</button>
         </div>
       </header>
@@ -46,15 +77,15 @@ function App() {
         <div className="skills-grid">
             <div className="skill-card">
                 <h4>Frontend</h4>
-                <ul>{data.skills.frontend.map(s => <li key={s}>{s}</li>)}</ul>
+                <ul>{data.skills.frontend.map((s, i) => <li key={i}>{s}</li>)}</ul>
             </div>
             <div className="skill-card">
                 <h4>Backend</h4>
-                <ul>{data.skills.backend.map(s => <li key={s}>{s}</li>)}</ul>
+                <ul>{data.skills.backend.map((s, i) => <li key={i}>{s}</li>)}</ul>
             </div>
             <div className="skill-card">
                 <h4>DevOps</h4>
-                <ul>{data.skills.devOps.map(s => <li key={s}>{s}</li>)}</ul>
+                <ul>{data.skills.devOps.map((s, i) => <li key={i}>{s}</li>)}</ul>
             </div>
         </div>
       </section>
@@ -62,8 +93,8 @@ function App() {
       <section className="section">
         <h3>Featured Deployments</h3>
         <div className="projects-grid">
-            {data.projects.map(proj => (
-                <div key={proj.id} className="project-card">
+            {data.projects.map((proj, i) => (
+                <div key={i} className="project-card">
                     <span className="badge">{proj.type}</span>
                     <h4>{proj.title}</h4>
                     <p>{proj.desc}</p>
