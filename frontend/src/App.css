@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* frontend/src/App.css */
+body {
+    background-color: #0f172a; /* Deep Blue/Black */
+    color: #e2e8f0;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for coding feel */
+    margin: 0;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #334155; }
+.logo { font-weight: bold; font-size: 1.2rem; color: #38bdf8; }
+.status-badge { font-size: 0.9rem; background: #1e293b; padding: 5px 10px; border-radius: 20px; border: 1px solid #334155;}
+
+/* Hero */
+.hero { text-align: center; padding: 60px 0; }
+.hero h1 { font-size: 3rem; margin-bottom: 10px; color: #f8fafc; }
+.hero h2 { color: #94a3b8; font-weight: normal; margin-top: 0; }
+.cta-buttons { margin-top: 20px; }
+.primary-btn { background: #38bdf8; color: #0f172a; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; margin-right: 10px; }
+.secondary-btn { background: transparent; color: #38bdf8; border: 1px solid #38bdf8; padding: 10px 20px; cursor: pointer; }
+
+/* Skills & Projects */
+.section { margin-top: 50px; }
+.section h3 { border-left: 4px solid #38bdf8; padding-left: 10px; margin-bottom: 20px; }
+
+.skills-grid, .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+.skill-card, .project-card { background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; }
+.skill-card ul { padding-left: 20px; color: #cbd5e1; }
+.badge { background: #0f172a; padding: 4px 8px; font-size: 0.7rem; color: #38bdf8; border-radius: 4px; border: 1px solid #38bdf8; }
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Isse photo Gol ho jayegi */
+    object-fit: cover;
+    border: 4px solid #38bdf8; /* Blue border */
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); /* Glow effect */
+}
