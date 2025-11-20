@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import myPic from './ahsan.jpg'; 
 
 function App() {
   const [data, setData] = useState(null);
   const [serverStatus, setServerStatus] = useState("Connecting...");
 
-// Is line ko update karein:
-fetch('https://ahsan-api-final.vercel.app/api/data')
+  useEffect(() => {
+    // Yahan humne naya Live Link laga diya hai
+    fetch('https://ahsan-api-final.vercel.app/api/data')
       .then(res => res.json())
       .then(result => {
         setData(result);
@@ -24,13 +26,12 @@ fetch('https://ahsan-api-final.vercel.app/api/data')
         <div className="status-badge">API Status: {serverStatus}</div>
       </nav>
 
-<header className="hero">
-        {/* Photo yahan add ki hai */}
-<img 
-    src="/profile.jpg"  // Humne direct naam likh diya
-    alt="Profile" 
-    className="profile-pic" 
-/>
+      <header className="hero">
+        <img 
+            src={myPic} 
+            alt="Muhammad Ahsan" 
+            className="profile-pic" 
+        />
         <h1>{data.profile.name}</h1>
         <h2>{data.profile.role}</h2>
         <p>{data.profile.bio}</p>
