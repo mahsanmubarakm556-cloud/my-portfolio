@@ -55,3 +55,5 @@ app.get('/api/data', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+// Isko file ke sabse end mein likhein
+module.exports = app;
