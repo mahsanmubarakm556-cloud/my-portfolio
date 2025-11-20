@@ -1,15 +1,17 @@
-// Updated Code Version 2
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import myPic from './ahsan.jpg'; 
+
+// Note: Humne local image import hata diya hai taaki error na aaye.
+// Abhi hum internet wali photo use kar rahe hain.
 
 function App() {
-  // Default Data (Agar server fail ho jaye to yeh dikhega)
+  // 1. Default Data (Taaki loading par website atke nahi)
   const defaultData = {
     profile: {
       name: "Muhammad Ahsan Mubarak",
       role: "Full Stack Developer (MERN)",
       bio: "Based in Pakistan 🇵🇰. Bridging the gap between clean code and interactive design.",
+      avatar: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" // Dummy Image
     },
     skills: {
       frontend: ["React.js", "Tailwind CSS", "HTML/CSS", "JavaScript"],
@@ -17,17 +19,18 @@ function App() {
       devOps: ["Git", "GitHub", "Vercel", "Render"]
     },
     projects: [
-      { id: 1, title: "Project Loading...", desc: "Server is connecting...", type: "Waiting" }
+      { id: 1, title: "Project Loading...", desc: "Connecting to server...", type: "Waiting" }
     ]
   };
 
   const [data, setData] = useState(defaultData);
   const [serverStatus, setServerStatus] = useState("Connecting...");
 
+  // 2. Data Fetching from Live Backend
   useEffect(() => {
     fetch('https://ahsan-api-final.vercel.app/api/data')
       .then(res => {
-        if (!res.ok) throw new Error("Failed");
+        if (!res.ok) throw new Error("Backend Failed");
         return res.json();
       })
       .then(result => {
@@ -35,9 +38,8 @@ function App() {
         setServerStatus("Online 🟢");
       })
       .catch(err => {
-        console.log("Server Error:", err);
-        setServerStatus("Offline 🔴 (Using Local Data)");
-        // Agar error aaye to hum data ko null nahi karte, balki defaultData hi rehne dete hain
+        console.log("Error:", err);
+        setServerStatus("Offline 🔴 (Local Data)");
       });
   }, []);
 
@@ -49,8 +51,9 @@ function App() {
       </nav>
 
       <header className="hero">
+        {/* Internet wali photo use kar rahe hain taaki error na aaye */}
         <img 
-            src={myPic} 
+            src={data.profile.avatar || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
             alt="Profile" 
             className="profile-pic" 
         />
@@ -95,7 +98,7 @@ function App() {
         <h3>Featured Deployments</h3>
         <div className="projects-grid">
             {data.projects.map((proj, i) => (
-                <div key={i} className="project-card">
+                <div key={proj.id} className="project-card">
                     <span className="badge">{proj.type}</span>
                     <h4>{proj.title}</h4>
                     <p>{proj.desc}</p>
