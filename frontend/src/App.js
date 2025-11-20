@@ -5,8 +5,8 @@ function App() {
   const [data, setData] = useState(null);
   const [serverStatus, setServerStatus] = useState("Connecting...");
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/data')
+// Is line ko update karein:
+fetch('https://ahsan-api-final.vercel.app/api/data')
       .then(res => res.json())
       .then(result => {
         setData(result);
