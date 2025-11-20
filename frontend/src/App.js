@@ -1,3 +1,4 @@
+// Updated Code Version 2
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import myPic from './ahsan.jpg'; 
