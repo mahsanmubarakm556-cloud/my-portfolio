@@ -72,7 +72,16 @@ function App() {
             >
               View Resume
             </a>
-            <button className="secondary-btn">GitHub</button>
+            {/* Is GitHub button ko replace karein */}
+<a 
+  href="https://github.com/mahsanmubarakm556-cloud" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="secondary-btn"
+  style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}
+>
+  GitHub
+</a>
         </div>
       </header>
 
