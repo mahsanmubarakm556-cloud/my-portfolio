@@ -35,7 +35,12 @@ const projects = [
         type: "Backend Heavy"
     }
 ];
+// --- Yeh naya route add karein ---
+app.get('/', (req, res) => {
+    res.send("Server is Running! 🚀. Go to /api/data to see data.");
+});
 
+// ... baaki purana code (app.get /api/data waghaira) neeche rahega ...
 // --- API Routes ---
 
 // 1. Health Check (Server Status)
